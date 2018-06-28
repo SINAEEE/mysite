@@ -9,9 +9,11 @@
 
 4. 장고 프로젝트 생성
 
-5. 디렉토리정리
+5. app 생성
 
-6. settings.py
+6. 디렉토리정리
+
+7. settings.py
 
 DATABASES = {
     'default': {
@@ -24,17 +26,17 @@ DATABASES = {
     }
 }
 
-7.기본적으로 장고 프로젝트가 관리하는 테이블 생성하기
+8.기본적으로 장고 프로젝트가 관리하는 테이블 생성하기
 터미널에서
 python manage.py migrate
 스키마가 변경되면 migrate
 
 No migrations to apply. -> 기존에 생성된 table이 있기때문에
 
-8.장고 프로젝트 관리자 계정생성
+9.장고 프로젝트 관리자 계정생성
 python manage.py createsuperuser
 
-9. 지금까지 작업확인
+10. 지금까지 작업확인
 1)서버시작하기
 터미널에서
 python manage.py runserver 0.0.0.0:8888
