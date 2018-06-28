@@ -23,5 +23,6 @@ urlpatterns = [
 
     path('',main_views.index),
     path('guestbook/',guestbook_views.list),
-    path('guestbook/add', guestbook_views.add)
+    path('guestbook/add', guestbook_views.add),
+    path('guestbook/delete', guestbook_views.deleteform)
 ]
