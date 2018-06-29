@@ -30,6 +30,9 @@ urlpatterns = [
 
     path('user/joinform/',user_views.joinform),
     path('user/join',user_views.join),
-    path('user/joinsuccess/',user_views.joinsuccess)
+    path('user/joinsuccess/',user_views.joinsuccess),
+    path('user/loginform/', user_views.loginform),
+    path('user/login', user_views.login),
+    path('user/logout',user_views.logout)
 
 ]
