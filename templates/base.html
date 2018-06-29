@@ -15,7 +15,7 @@
 				{% if request.session.authuser is None %}
 					<li><a href="/user/loginform">로그인</a><li>
 					<li><a href="/user/joinform">회원가입</a><li>
-				{% else }
+				{% else %}
 					<li><a href="/user/modifyform">회원정보수정</a><li>
 					<li><a href="/user/logout">로그아웃</a><li>
 					<li>{{ request.session.authuser.name }}님 안녕하세요 ^^;</li>
