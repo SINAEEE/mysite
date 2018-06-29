@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('',main_views.index),
+
     path('guestbook/',guestbook_views.list),
     path('guestbook/add', guestbook_views.add),
     path('guestbook/deleteform',guestbook_views.deleteform),
@@ -33,6 +34,8 @@ urlpatterns = [
     path('user/joinsuccess/',user_views.joinsuccess),
     path('user/loginform/', user_views.loginform),
     path('user/login', user_views.login),
-    path('user/logout',user_views.logout)
+    path('user/logout',user_views.logout),
+
+    path('board/',board_views.list),
 
 ]
