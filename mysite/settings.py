@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mathfilters',
     'main',
-    'guestbook'
+    'guestbook',
+    'user'
 ]
 
 MIDDLEWARE = [

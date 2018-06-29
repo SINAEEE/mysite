@@ -23,15 +23,16 @@ def add(request):
 
     return HttpResponseRedirect('/guestbook')
 
+def deleteform(request):
+    return render(request, 'guestbook/deleteform.html')
+
+
 def delete(request):
     guestbook = Guestbook()
-    guestbook.objects.filter(id=id).filter(password='password').delete()
-    #Guestbook.objects.filter(password='password').delete()
-    #id랑 pw가 넘어오니까 filter 2개
+    guestbook.objects.filter(id=request.POST.get('id','')).filter(password=request.POST.get('password','')).delete()
 
-    #guestbook.save()
+    guestbook.save()
 
-    #return render(request, 'guestbook/deleteform.html')
     return HttpResponseRedirect('/guestbook')
 
 
