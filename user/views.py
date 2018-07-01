@@ -26,6 +26,9 @@ def loginform(request):
 
 def login(request):
     result = User.objects.filter(email=request.POST['email']).filter(password=request.POST['password'])
+    #success result : <QuerySet [<User: User(ksa@gmail.com, 김신애, female)>]>
+    #success result[0] : User(ksa@gmail.com, 김신애, female)
+    print(type(result))
 
     #로그인 실패
     if len(result) == 0:
