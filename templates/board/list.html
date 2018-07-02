@@ -46,7 +46,10 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="/board/writeform?id={{board.id}}" id="new-book">글쓰기</a>
+					{% if request.session.authuser is not None %}
+						<a href="/board/writeform?id={{board.id}}" id="new-book">글쓰기</a>
+					{% endif %}
+
 				</div>				
 			</div>
 {% endblock %}

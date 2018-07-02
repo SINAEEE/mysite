@@ -28,7 +28,7 @@ def login(request):
     result = User.objects.filter(email=request.POST['email']).filter(password=request.POST['password'])
     #success result : <QuerySet [<User: User(ksa@gmail.com, 김신애, female)>]>
     #success result[0] : User(ksa@gmail.com, 김신애, female)
-    print(type(result))
+    #print(type(result))
 
     #로그인 실패
     if len(result) == 0:
@@ -37,6 +37,7 @@ def login(request):
     #로그인 처리
     authuser = result[0]
     request.session['authuser'] = model_to_dict(authuser)
+    #print(authuser) #User(kimshin1227@gmail.com, 김신애, female)
 
     return HttpResponseRedirect('/')
     #return HttpResponse('helloworld')
