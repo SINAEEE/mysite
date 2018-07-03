@@ -8,7 +8,9 @@ from board.models import Board
 # Create your views here.
 
 def list(request):
-        return render(request, 'board/list.html')
+    board_list = Board.objects.all()
+    context = {'board_list' : board_list}
+    return render(request, 'board/list.html', context)
     # guestbook_list = Board.objects.all().order_by('-regdate')
     # context = {'guestbook_list': guestbook_list}
     # return render(request,'guestbook/list.html',context)
@@ -22,11 +24,17 @@ def writeform(request):
         return render(request, 'board/writeform.html')
 
 def write(request):
+    #print(request.POST[0])
+    #r1 = request.POST[0]
+    board = Board()
+    #request.session['r1'] = model_to_dict(r1)
+    #print(r1)
+    #board.user.id = request.session['authuser'][id]
+    board.user.id = request.POST[0]['id']
+    board.title = request.POST['title']
+    board.content = request.POST['content']
 
-    Board.title = request.POST['title']
-    Board.content = request.POST['content']
-
-    Board.save()
+    board.save()
 
     return HttpResponseRedirect('/board')
 
