@@ -9,13 +9,9 @@ from user.models import User
 # Create your views here.
 
 def list(request):
-    board_list = Board.objects.all()
+    board_list = Board.objects.all().order_by('-regdate')
     context = {'board_list' : board_list}
     return render(request, 'board/list.html', context)
-    # guestbook_list = Board.objects.all().order_by('-regdate')
-    # context = {'guestbook_list': guestbook_list}
-    # return render(request,'guestbook/list.html',context)
-
 
 def writeform(request):
     #인증 체크
@@ -29,7 +25,7 @@ def write(request):
     #<QueryDict: {'csrfmiddlewaretoken': ['oaus3dlQyB6CvnTJuL4jMN1O13EfaCccMF9liEmiTqf3VXpxwmqJkD2gYhKXmqj3'], 'a': ['1'], 'title': ['1'], 'content': ['1']}>
 
     #board.user.id = request.session['authuser'][id]
-    print(request.POST['a'])
+    #print(request.POST['a'])
 
     board = Board()
     #board.user = User.objects.get(id=(request.POST.get('a'))[0])
@@ -41,6 +37,15 @@ def write(request):
 
     return HttpResponseRedirect('/board')
 
+def view(request):
+    b_id = request.GET['id']
+    print(b_id)
+    if Board.objects.filter(id=b_id):
+    view_list = Board.objects.get(id=b_id)
+    print(view_list)
+
+
+    return render(request, 'board/view.html')
 
 
 

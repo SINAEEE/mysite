@@ -45,3 +45,5 @@ def login(request):
 def logout(request):
     del request.session['authuser']
     return HttpResponseRedirect('/')
+
+

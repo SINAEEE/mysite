@@ -7,7 +7,7 @@ from guestbook.models import Guestbook
 
 
 def list(request):
-    guestbook_list = Guestbook.objects.all().order_by('-regdate')
+    guestbook_list = Guestbook.objects.all().order_by('-regdate') #object : DB Table 행
     context = {'guestbook_list': guestbook_list}
     return render(request,'guestbook/list.html',context)
 

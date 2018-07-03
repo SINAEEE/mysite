@@ -2,6 +2,8 @@
 
 {% block css_link %}
 
+{% load mathfilters %}
+
 <link href="/assets/css/board.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
@@ -24,11 +26,13 @@
 					</tr>
 					{% for boardlist in board_list %}
 					<tr>
-						<td>3</td>
-						<td><a href="">{{boardlist.title}}</a></td>
-						<td>{{boardlist.name}}</td>
+						<td>{{ board_list.count| add:1 | sub:forloop.counter }}</td>
+						{% if request.session.authuser is not None %}
+							<td><a href="/board/view?b_id={{ boardlist.id }}">{{boardlist.title}}</a></td>
+						{% endif %}
+						<td>{{boardlist.user.name}}</td>
 						<td>{{boardlist.hit}}</td>
-						<td>{{boardlist.regdate}}</td>
+						<td>{{ boardlist.regdate }}</td>
 						<td><a href="" class="del">삭제</a></td>
 					</tr>
 					{% endfor %}
@@ -37,8 +41,9 @@
 				<div class="bottom">
 					{% if request.session.authuser is not None %}
 						<a href="/board/writeform?id={{ request.session.authuser.id }}" id="new-book">글쓰기</a>
+					{% elif request.session.authuser is None %}
+						<a href="/user/loginform" id="new-book">글쓰기</a>
 					{% endif %}
-
 				</div>				
 			</div>
 {% endblock %}
