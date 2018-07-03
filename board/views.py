@@ -2,6 +2,7 @@ from django.forms import model_to_dict
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from board.models import Board
+from user.models import User
 
 
 
@@ -24,13 +25,15 @@ def writeform(request):
         return render(request, 'board/writeform.html')
 
 def write(request):
-    #print(request.POST[0])
-    #r1 = request.POST[0]
-    board = Board()
-    #request.session['r1'] = model_to_dict(r1)
-    #print(r1)
+    #print(request.POST)
+    #<QueryDict: {'csrfmiddlewaretoken': ['oaus3dlQyB6CvnTJuL4jMN1O13EfaCccMF9liEmiTqf3VXpxwmqJkD2gYhKXmqj3'], 'a': ['1'], 'title': ['1'], 'content': ['1']}>
+
     #board.user.id = request.session['authuser'][id]
-    board.user.id = request.POST[0]['id']
+    print(request.POST['a'])
+
+    board = Board()
+    #board.user = User.objects.get(id=(request.POST.get('a'))[0])
+    board.user = User.objects.get(id=request.POST['a'])
     board.title = request.POST['title']
     board.content = request.POST['content']
 
