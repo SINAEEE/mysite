@@ -38,14 +38,16 @@ def write(request):
     return HttpResponseRedirect('/board')
 
 def view(request):
-    b_id = request.GET['id']
+    #print(Board.objects.all())
+    b_id = request.GET['b_id']
     print(b_id)
-    if Board.objects.filter(id=b_id):
-    view_list = Board.objects.get(id=b_id)
-    print(view_list)
+    view_list = Board.objects.filter(id=b_id)
+    #print(view_list) #<QuerySet [<Board: Board(1, 1, 0, 2018-07-04 13:45:56+00:00, 1)>]>
+    #print(view_list[0]) #Board(1, 1, 0, 2018-07-04 13:45:56+00:00, 1)
+    #print(model_to_dict(view_list[0])) #{'id': 1, 'title': '1', 'content': '1', 'hit': 0, 'user': 1}
 
-
-    return render(request, 'board/view.html')
+    context = {'view_list' : view_list[0]}
+    return render(request, 'board/view.html',context)
 
 
 
