@@ -29,6 +29,8 @@
 						<td>{{ board_list.count| add:1 | sub:forloop.counter }}</td>
 						{% if request.session.authuser is not None %}
 							<td><a href="/board/view?b_id={{ boardlist.id }}">{{boardlist.title}}</a></td>
+						{% elif request.session.authuser is None %}
+							<td><a href="">{{boardlist.title}}</a></td>
 						{% endif %}
 						<td>{{boardlist.user.name}}</td>
 						<td>{{boardlist.hit}}</td>
