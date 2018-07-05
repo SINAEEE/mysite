@@ -41,9 +41,9 @@ def write(request):
 
 
 def view(request):
-    #print(Board.objects.all())
+    print(Board.objects.all())
     b_id = request.GET['b_id']
-    #print(b_id)
+    print(b_id)
     view_list = Board.objects.filter(id=b_id)
     #print(view_list) #<QuerySet [<Board: Board(1, 1, 0, 2018-07-04 13:45:56+00:00, 1)>]>
     #print(view_list[0]) #Board(1, 1, 0, 2018-07-04 13:45:56+00:00, 1)
@@ -54,7 +54,7 @@ def view(request):
 
 
 def delete(request):
-    print(request.GET)
+    #print(request.GET)
     b_id = request.GET['id']
     #print(b_id)
     Board.objects.filter(id=b_id).delete()
@@ -65,11 +65,27 @@ def delete(request):
 
 
 def modifyform(request):
-    return render(request, 'board/modifyform.html')
+    id = request.GET['id']
+    mcontent = Board.objects.filter(id=id)
+    context = {'mcontent': mcontent[0]}
+    return render(request, 'board/modifyform.html',context)
 
 
 def modify(request):
-    pass
+    board = Board()
+    id = request.GET['id']
+    board.user = User.objects.get(id=id)
+    #board.user = User.objects.get(id=request.GET['id'])
+    board.title = request.POST['title']
+    board.content = request.POST['content']
+
+    board.save()
+
+    return HttpResponseRedirect('/board')
+
+
+
+
 
 
 
