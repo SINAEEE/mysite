@@ -1,6 +1,6 @@
 from django.forms import model_to_dict
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from board.models import Board
 from user.models import User
 
@@ -41,9 +41,9 @@ def write(request):
 
 
 def view(request):
-    print(Board.objects.all())
+    #print(Board.objects.all())
     b_id = request.GET['b_id']
-    print(b_id)
+    #print(b_id)
     view_list = Board.objects.filter(id=b_id)
     #print(view_list) #<QuerySet [<Board: Board(1, 1, 0, 2018-07-04 13:45:56+00:00, 1)>]>
     #print(view_list[0]) #Board(1, 1, 0, 2018-07-04 13:45:56+00:00, 1)
@@ -66,27 +66,23 @@ def delete(request):
 
 def modifyform(request):
     id = request.GET['id']
+    #print(id)
     mcontent = Board.objects.filter(id=id)
     context = {'mcontent': mcontent[0]}
+    #print(mcontent[0]) #Board(test, test, 0, 2018-07-08 02:41:46+00:00, 3)
     return render(request, 'board/modifyform.html',context)
 
 
 def modify(request):
-    board = Board()
-    id = request.GET['id']
-    board.user = User.objects.get(id=id)
-    #board.user = User.objects.get(id=request.GET['id'])
-    board.title = request.POST['title']
-    board.content = request.POST['content']
 
-    board.save()
+    bid = request.POST['bid']
+    #print(bid)
+    md_board = Board.objects.get(id=bid)
+    #print(md_board)
+    md_board.title = request.POST['title']
+    md_board.content = request.POST['content']
+    md_board.save()
 
     return HttpResponseRedirect('/board')
-
-
-
-
-
-
 
 
